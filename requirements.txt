@@ -98,7 +98,7 @@ nbserverproxy==0.8.1
 nc-time-axis==1.1.0
 netCDF4==1.4.0
 networkx==2.1
-notebook==5.5.0
+notebook>=5.7.2
 numba==0.39.0
 numcodecs==0.5.5
 numpy==1.14.5
