@@ -513,7 +513,7 @@ def make_video(picture_filepath, end_video_filepath, interpolate=False, resize_v
         return_value = subprocess.call(["ffmpeg","-y","-r","24", "-i", (picture_filepath + "/%04d.png"), 
                                         "-filter", "minterpolate", "-vcodec", "mpeg4","-qscale","5", "-r", "24", 
                                         end_video_filepath])
-        return return_value
+        
         clip = mp.VideoFileClip(end_video_filepath)
         clip_resized = clip.resize(height=1000)
         clip_resized.write_videofile(end_video_filepath)
