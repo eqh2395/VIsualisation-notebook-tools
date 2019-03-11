@@ -3,7 +3,8 @@
 """
 Creates iris cubes, turns them into geographical plots and creates a video visualisation from them for time series data.
 Timestamp data must be part of your file metadata as opposed to part of the file itself to use this tool.
-Recommended that requirements.txt is installed before installing this library. Download, cd to its directory and type 'pip  install -r requirements.txt' into shell.
+Recommended that requirements.txt is installed before installing this library. Download, cd to its directory and type 
+'pip  install -r requirements.txt' into shell.
 """
     
 import iris
@@ -48,7 +49,8 @@ def load_path(folder_path):
     """
     Creates a list of filepaths with the appropriate formatting for processing.
     
-    folder_path: Filepath to directory containing intended data to be used. Directory must contain only files intended to be    plotted.
+    folder_path: Filepath to directory containing intended data to be used. Directory must contain only files intended to be    
+    plotted.
     Acceptible types of file are CF NetCDF, GRIB 1 & 2, PP and FieldsFiles file formats based on compatability with iris.
     """
     filenames = sorted(os.listdir(folder_path))
@@ -130,11 +132,17 @@ def load_uniform_cubes(filepath, add_coord=None, aggregate=None, subset=None, ma
     
     Kwargs:
     
-    add_coord: Turns a metadata attribute into a new cube dimension. Takes a tuple in this format - (meta_data_name,    starting_index, final_index, new_dimension_name). meta_data_name=string value of attribute, starting_index=index of starting numerical value in attribute to be contained in new dimension, final_index=end index of numerical value in attribute to be contained in new dimension, new_dimension_name=string value of name of new cube dimension.
+    add_coord: Turns a metadata attribute into a new cube dimension. Takes a tuple in this format - (meta_data_name,    
+    starting_index, final_index, new_dimension_name). meta_data_name=string value of attribute, 
+    starting_index=index of starting numerical value in attribute to be contained in new dimension, 
+    final_index=end index of numerical value in attribute to be contained in new dimension, 
+    new_dimension_name=string value of name of new cube dimension.
     
-    aggregate: Takes dimension to collapse cube along and returns cumulative sum of coordinate along that dimension. Only collapses along dimension if cube has more than 2 dimensions. Dimension must contain data non-uniform across the cube.
+    aggregate: Takes dimension to collapse cube along and returns cumulative sum of coordinate along that dimension. 
+    Only collapses along dimension if cube has more than 2 dimensions. Dimension must contain data non-uniform across the cube.
     
-    subset: Restricts data to an intersection of the cube with specified coordinate ranges. Takes a tuple containing floats in this format - (west, east, south, north).
+    subset: Restricts data to an intersection of the cube with specified coordinate ranges. 
+    Takes a tuple containing floats in this format - (west, east, south, north).
     
     masking: Masks all data that is smaller than a specified value. Takes a float.
     
@@ -190,14 +198,16 @@ def __extract_cube__(filepath, constraint, add_coord=None, aggregate=None, subse
 def extract_cube(filepath, constraint, add_coord=None, aggregate=None, subset=None, masking=None, scheduler_address=None):
     
     """
-    Extracts a single cube from filepath to CF NetCDF, GRIB 1 & 2, PP or FieldsFiles files. Will take all files grouped together by specified metadata and merge them into one cube.
+    Extracts a single cube from filepath to CF NetCDF, GRIB 1 & 2, PP or FieldsFiles files. 
+    Will take all files grouped together by specified metadata and merge them into one cube.
         
         
     Args:
     
     filepath: Path to the file containing the data.
     
-    constraint: a string, float, or integer describing an item of metadata (e.g. name, model level number, etc...) that distinguishes it from other files.
+    constraint: a string, float, or integer describing an item of metadata (e.g. name, model level number, etc...) 
+    that distinguishes it from other files.
     These files will then be merged into one cube.
         
     Example: ('./prods_op_mogreps-uk_20130703_03_00_003.nc','stratiform_snowfall_rate')
@@ -205,15 +215,22 @@ def extract_cube(filepath, constraint, add_coord=None, aggregate=None, subset=No
         
     Kwargs:
         
-    add_coord: Turns a metadata attribute into a new cube dimension. Takes a tuple in this format - (meta_data_name,    starting_index, final_index, new_dimension_name). meta_data_name=string value of attribute, starting_index=index of starting numerical value in attribute to be contained in new dimension, final_index=end index of numerical value in attribute to be contained in new dimension, new_dimension_name=string value of name of new cube dimension.
+    add_coord: Turns a metadata attribute into a new cube dimension. Takes a tuple in this format - 
+    (meta_data_name,    starting_index, final_index, new_dimension_name). meta_data_name=string value of attribute, 
+    starting_index=index of starting numerical value in attribute to be contained in new dimension, 
+    final_index=end index of numerical value in attribute to be contained in new dimension, 
+    new_dimension_name=string value of name of new cube dimension.
     
-    aggregate: Takes dimension to collapse cube along and returns cumulative sum of coordinate along that dimension. Only collapses along dimension if cube has more than 2 dimensions. Dimension must contain data non-uniform across the cube.
+    aggregate: Takes dimension to collapse cube along and returns cumulative sum of coordinate along that dimension. 
+    Only collapses along dimension if cube has more than 2 dimensions. Dimension must contain data non-uniform across the cube.
     
-    subset: Restricts data to an intersection of the cube with specified coordinate ranges. Takes a tuple containing floats in this format - (west, east, south, north).
+    subset: Restricts data to an intersection of the cube with specified coordinate ranges. 
+    Takes a tuple containing floats in this format - (west, east, south, north).
     
     masking: Masks all data that is smaller than a specified value. Takes a float.
     
-    For optimal runtime, specify own dask client. If dask errors are raised, ensure that lenny has been installed on the workers.
+    For optimal runtime, specify own dask client. 
+    If dask errors are raised, ensure that lenny has been installed on the workers.
         
     """
     
@@ -221,7 +238,11 @@ def extract_cube(filepath, constraint, add_coord=None, aggregate=None, subset=No
     cubes = loadcubes.compute()
     
         
-def __make_plots__(cube_list, save_filepath, figsize=(16,9), terrain=cimgt.StamenTerrain(), logscaled=True, vmin=None, vmax=None, colourmap='viridis', colourbarticks=None, colourbarticklabels=None, colourbar_label=None, markerpoint=None, markercolor='#B9DC0C', timestamp=None, time_box_position=None, plottitle=None, box_colour='#FFFFFF', textcolour='#000000', coastlines=False, scheduler_address=None):
+def __make_plots__(cube_list, save_filepath, figsize=(16,9), terrain=cimgt.StamenTerrain(), 
+                   logscaled=True, vmin=None, vmax=None, colourmap='viridis', colourbarticks=None, 
+                   colourbarticklabels=None, colourbar_label=None, markerpoint=None, markercolor='#B9DC0C', 
+                   timestamp=None, time_box_position=None, plottitle=None, box_colour='#FFFFFF', textcolour='#000000', 
+                   coastlines=False, scheduler_address=None):
 
     cubenumber, cube = cube_list
         
@@ -265,25 +286,31 @@ def __make_plots__(cube_list, save_filepath, figsize=(16,9), terrain=cimgt.Stame
     colorbar.set_ticklabels(colourbarticklabels)
     
     if colourbar_label is not None:
-        colorbar.set_label(colourbar_label, fontproperties='FT2Font', color=box_colour, fontsize=8, bbox=dict(facecolor=box_colour, edgecolor='#2A2A2A', boxstyle='square'))
+        colorbar.set_label(colourbar_label, fontproperties='FT2Font', color=box_colour, fontsize=8, 
+                           bbox=dict(facecolor=box_colour, edgecolor='#2A2A2A', boxstyle='square'))
     
     if markerpoint is not None and markercolor is not None:
         longitude, latitude, name_of_place = markerpoint
         fig.plot(longitude, latitude, marker='^', color=markercolor, markersize=12, transform=ccrs.Geodetic())
         geodetic_transform = ccrs.Geodetic()._as_mpl_transform(fig)
         text_transform = offset_copy(geodetic_transform, units='dots', y=+75)
-        fig.text(longitude, latitude, u+name_of_place, fontproperties='FT2Font', alpha=1, fontsize=8, verticalalignment='center', horizontalalignment='right', transform=text_transform, bbox=dict(facecolor=markercolor, edgecolor='#2A2A2A', boxstyle='round'))
+        fig.text(longitude, latitude, u+name_of_place, fontproperties='FT2Font', alpha=1, fontsize=8, 
+                 verticalalignment='center', horizontalalignment='right', transform=text_transform, 
+                 bbox=dict(facecolor=markercolor, edgecolor='#2A2A2A', boxstyle='round'))
     
     if timestamp is not None:
         attributedict = subset.attributes
         datetime = attributedict.get(timestamp)
         timetransform = offset_copy(geodetic_transform, units='dots', y=0)
         longitude_of_time_box, latitude_of_time_box = time_box_position
-        fig.text(longitude_of_time_box, latitude_of_time_box, "Time, date: "+ datetime, fontproperties='FT2Font', alpha=0.7, fontsize=8 , transform=timetransform, bbox=dict(facecolor=markercolor, edgecolor='#2A2A2A', boxstyle='round'))
+        fig.text(longitude_of_time_box, latitude_of_time_box, "Time, date: "+ datetime, fontproperties='FT2Font', 
+                 alpha=0.7, fontsize=8 , transform=timetransform, bbox=dict(facecolor=markercolor, edgecolor='#2A2A2A', 
+                                                                            boxstyle='round'))
             
     if plottitle is not None:
         titleaxes = plt.axes([0.2, 0.8, 0.65, 0.04], facecolor=box_colour)
-        titleaxes.text(0.5,0.25, plottitle, horizontalalignment = 'center',  fontproperties='FT2Font', fontsize=10, weight=600, color = textcolour)
+        titleaxes.text(0.5,0.25, plottitle, horizontalalignment = 'center',  fontproperties='FT2Font', fontsize=10, 
+                       weight=600, color = textcolour)
         titleaxes.set_yticks([])
         titleaxes.set_xticks([])
 
@@ -291,7 +318,10 @@ def __make_plots__(cube_list, save_filepath, figsize=(16,9), terrain=cimgt.Stame
     plt.savefig(picturename, dpi=200, bbox_inches="tight")
         
 
-def make_plots(cube_list, save_filepath, figsize=(16,9), terrain=cimgt.StamenTerrain(), logscaled=True, vmin=None, vmax=None, colourmap='viridis', colourbarticks=None, colourbarticklabels=None, colourbar_label=None, markerpoint=None, markercolor='#B9DC0C', timestamp=None, time_box_position=None, plottitle=None, box_colour='#FFFFFF', textcolour=None, coastlines=False, scheduler_address=None):
+def make_plots(cube_list, save_filepath, figsize=(16,9), terrain=cimgt.StamenTerrain(), logscaled=True, 
+               vmin=None, vmax=None, colourmap='viridis', colourbarticks=None, colourbarticklabels=None, 
+               colourbar_label=None, markerpoint=None, markercolor='#B9DC0C', timestamp=None, time_box_position=None, 
+               plottitle=None, box_colour='#FFFFFF', textcolour=None, coastlines=False, scheduler_address=None):
     
     """
     Makes plots from list of iris cubes.
@@ -308,15 +338,18 @@ def make_plots(cube_list, save_filepath, figsize=(16,9), terrain=cimgt.StamenTer
     
     figsize: Sets size of figure. Default is 16 in x 9 in. Takes a tuple of integers or floats (e.g. (16, 9)).
     
-    terrain: Sets background map image on plot. Default is Stamen Terrain. See further options here: https://scitools.org.uk/cartopy/docs/latest/cartopy/io/img_tiles.html
+    terrain: Sets background map image on plot. Default is Stamen Terrain. See further options here: 
+    https://scitools.org.uk/cartopy/docs/latest/cartopy/io/img_tiles.html
     
-    logscaled: Plots data on a logarithmic (to the base-10) scale. Takes True or False. Makes more appealing visualisations of skewed data. Default is True.
+    logscaled: Plots data on a logarithmic (to the base-10) scale. Takes True or False. 
+    Makes more appealing visualisations of skewed data. Default is True.
     
     vmin: set lowest value to be displayed. Takes a float.
     
     vmax: set highest value to be displayed. Takes a float.
     
-    colourmap: Sets colour map for the plot. Default is 'viridis'. Other colourmaps: 'magma', 'plasma', 'inferno', 'cividis'. See https://matplotlib.org/tutorials/colors/colormaps.html for more colourmap options.
+    colourmap: Sets colour map for the plot. Default is 'viridis'. Other colourmaps: 'magma', 'plasma', 'inferno', 'cividis'. 
+    See https://matplotlib.org/tutorials/colors/colormaps.html for more colourmap options.
     
     colourbarticks: Sets position within data of ticks on colourbar. Takes a list of floats or integers, e.g. [10, 100, 1000].
     
@@ -324,11 +357,14 @@ def make_plots(cube_list, save_filepath, figsize=(16,9), terrain=cimgt.StamenTer
     
     colourbar_label: Sets colourbar legend. Takes a string.
     
-    markerpoint: Plots a marker on the map based on global coordinates. Takes a tuple in this format - (longitude, latitude, 'name_of_place'), longitude and latitude must be a float, name_of_place must be a string.
+    markerpoint: Plots a marker on the map based on global coordinates. Takes a tuple in this format - 
+    (longitude, latitude, 'name_of_place'), longitude and latitude must be a float, name_of_place must be a string.
     
     markercolor: Color of the location marker. Must be given as a string. Default is '#B9DC0C'.
     
-    timestamp: Places a timestamp box on each plot. Takes a string referring to name of timestep metadata within the cube. It must contain timesteps in original metadata to use this, as this takes the name of the timestep attribute.
+    timestamp: Places a timestamp box on each plot. 
+    Takes a string referring to name of timestep metadata within the cube. 
+    It must contain timesteps in original metadata to use this, as this takes the name of the timestep attribute.
     
     plottitle: Displays the title of your video horizontally across the top of the plots. Takes a string.
     
@@ -340,7 +376,8 @@ def make_plots(cube_list, save_filepath, figsize=(16,9), terrain=cimgt.StamenTer
         
     coastlines: Draw coastlines around land on the map. Takes True or False.
     
-    For optimal runtime, specify own dask client. If dask errors are raised, ensure that lenny has been installed on the workers.
+    For optimal runtime, specify own dask client. 
+    If dask errors are raised, ensure that lenny has been installed on the workers.
     
     """
     
@@ -353,18 +390,27 @@ def make_plots(cube_list, save_filepath, figsize=(16,9), terrain=cimgt.StamenTer
     if scheduler_address is not None:
         client =  scheduler_address
         client.run(lambda: sys.path.append(save_filepath))
-        makingplots = db.from_sequence(cube_list).map(__make_plots__, save_filepath, figsize, terrain, logscaled, vmin, vmax, colourmap, colourbarticks, colourbarticklabels, colourbar_label, markerpoint, markercolor, timestamp, time_box_position, plottitle, box_colour, textcolour, coastlines)
+        makingplots = db.from_sequence(cube_list).map(__make_plots__, save_filepath, figsize, terrain, logscaled, 
+                                                      vmin, vmax, colourmap, colourbarticks, colourbarticklabels, 
+                                                      colourbar_label, markerpoint, markercolor, timestamp, 
+                                                      time_box_position, plottitle, box_colour, textcolour, coastlines)
         plots = makingplots.compute()
 
     if scheduler_address==None:
         client=Client()
         client.run(lambda: sys.path.append(save_filepath))
-        makingplots = db.from_sequence(cube_list).map(__make_plots__, save_filepath, figsize, terrain, logscaled, vmin, vmax, colourmap, colourbarticks, colourbarticklabels, colourbar_label, markerpoint, markercolor, timestamp, time_box_position, plottitle, box_colour, textcolour, coastlines)
+        makingplots = db.from_sequence(cube_list).map(__make_plots__, save_filepath, figsize, terrain, logscaled, 
+                                                      vmin, vmax, colourmap, colourbarticks, colourbarticklabels, 
+                                                      colourbar_label, markerpoint, markercolor, timestamp, 
+                                                      time_box_position, plottitle, box_colour, textcolour, coastlines)
         plots = makingplots.compute()
     
     
     
-def try_make_plots_from_cubes(cube, save_filepath, figsize=(16,9), terrain=cimgt.StamenTerrain(), logscaled=True, vmin=None, vmax=None, colourmap='viridis', colourbarticks=None, colourbarticklabels=None, colourbar_label=None, markerpoint=None, markercolor='#B9DC0C', timestamp=None, time_box_position=None, plottitle=None, box_colour='#FFFFFF', textcolour=None, coastlines=False):
+def try_make_plots_from_cubes(cube, save_filepath, figsize=(16,9), terrain=cimgt.StamenTerrain(), logscaled=True, 
+                              vmin=None, vmax=None, colourmap='viridis', colourbarticks=None, colourbarticklabels=None, 
+                              colourbar_label=None, markerpoint=None, markercolor='#B9DC0C', timestamp=None, 
+                              time_box_position=None, plottitle=None, box_colour='#FFFFFF', textcolour=None, coastlines=False):
         
     """"
     Makes sample plot from cube. Can be used to refine plot specifications.
@@ -379,15 +425,18 @@ def try_make_plots_from_cubes(cube, save_filepath, figsize=(16,9), terrain=cimgt
     
     figsize: Sets size of figure. Default is 16 in x 9 in. Takes a tuple of integers or floats (e.g. (16, 9)).
     
-    terrain: Sets background map image on plot. Default is Stamen Terrain. See further options here: https://scitools.org.uk/cartopy/docs/latest/cartopy/io/img_tiles.html
+    terrain: Sets background map image on plot. Default is Stamen Terrain. See further options here: 
+    https://scitools.org.uk/cartopy/docs/latest/cartopy/io/img_tiles.html
     
-    logscaled: Plots data on a logarithmic (to the base-10) scale. Takes True or False. Makes more appealing visualisations of skewed data. Default is True.
+    logscaled: Plots data on a logarithmic (to the base-10) scale. Takes True or False. 
+    Makes more appealing visualisations of skewed data. Default is True.
     
     vmin: set lowest value to be displayed. Takes a float.
     
     vmax: set highest value to be displayed. Takes a float.
     
-    colourmap: Sets colour map for the plot. Default is 'viridis'. Other colourmaps: 'magma', 'plasma', 'inferno', 'cividis'. See https://matplotlib.org/tutorials/colors/colormaps.html for more colourmap options.
+    colourmap: Sets colour map for the plot. Default is 'viridis'. Other colourmaps: 'magma', 'plasma', 'inferno', 'cividis'. 
+    See https://matplotlib.org/tutorials/colors/colormaps.html for more colourmap options.
     
     colourbarticks: Sets position within data of ticks on colourbar. Takes a list of floats or integers, e.g. [10, 100, 1000].
     
@@ -395,11 +444,13 @@ def try_make_plots_from_cubes(cube, save_filepath, figsize=(16,9), terrain=cimgt
     
     colourbar_label: Sets colourbar legend. Takes a string.
     
-    markerpoint: Plots a marker on the map based on global coordinates. Takes a tuple in this format - (longitude, latitude, 'name_of_place'), longitude and latitude must be a float, name_of_place must be a string.
+    markerpoint: Plots a marker on the map based on global coordinates. Takes a tuple in this format - 
+    (longitude, latitude, 'name_of_place'), longitude and latitude must be a float, name_of_place must be a string.
     
     markercolor: Color of the location marker. Must be given as a string. Default is '#B9DC0C'.
     
-    timestamp: Places a timestamp box on each plot. Takes a string referring to name of timestep metadata within the cube. It must contain timesteps in original metadata to use this, as this takes the name of the timestep attribute.
+    timestamp: Places a timestamp box on each plot. Takes a string referring to name of timestep metadata within the cube. 
+    It must contain timesteps in original metadata to use this, as this takes the name of the timestep attribute.
     
     plottitle: Displays the title of your video horizontally across the top of the plots. Takes a string.
     
@@ -420,38 +471,48 @@ def try_make_plots_from_cubes(cube, save_filepath, figsize=(16,9), terrain=cimgt
 def make_video(picture_filepath, end_video_filepath, interpolate=False, resize_video=False):
     
     """
-    Zips together all png files within a specified filepath to make a video. Ensure that ffmpeg is installed in your environment before running.
+    Zips together all png files within a specified filepath to make a video. 
+    Ensure that ffmpeg is installed in your environment before running.
     
     
     Args:
     
-    picture_filepath: Filepath to png files to be made into video frames. Takes a string. Filepath must contain only png files intended for the video.
+    picture_filepath: Filepath to png files to be made into video frames. Takes a string. 
+    Filepath must contain only png files intended for the video.
     
     end_video_filepath: Intended filepath and filename of video. Takes a string.
     
     
     Kwargs:
     
-    interpolate: Creates additional frames between existing, meaning goes from 24 to 60 fps. This is done by taking the mean of the adjacent frames. Default is False. Takes True or False.
-    In order to use interpolate, must have ffmpeg 3.1 installed or higher. If you're video is over 1000??? bytes in height, set resize_video=True.
+    interpolate: Creates additional frames between existing, meaning goes from 24 to 60 fps. 
+    This is done by taking the mean of the adjacent frames. Default is False. Takes True or False.
+    In order to use interpolate, must have ffmpeg 3.1 installed or higher. If you're video is over 1000??? 
+    bytes in height, set resize_video=True.
     
-    resize_video: Creates a video, then resizes it to have a height of 1000 bytes, with width adjusted accordingly. Default False. Recommended if you wish to minterpolate and your video is large in size. 
+    resize_video: Creates a video, then resizes it to have a height of 1000 bytes, with width adjusted accordingly. 
+    Default False. Recommended if you wish to minterpolate and your video is large in size. 
     
     """
     
     if interpolate==False:
-        return_value = subprocess.call(["ffmpeg","-y","-r","24", "-i", (picture_filepath + "/%04d.png"), "-vcodec", "mpeg4","-qscale","5", "-r", "24", end_video_filepath])
+        return_value = subprocess.call(["ffmpeg","-y","-r","24", "-i", (picture_filepath + "/%04d.png"), 
+                                        "-vcodec", "mpeg4","-qscale","5", "-r", "24", end_video_filepath])
         return return_value
     
     if interpolate==True and resize_video==False:
-        return_value = subprocess.call(["ffmpeg","-y","-r","24", "-i", (picture_filepath + "/%04d.png"), "-filter", "minterpolate", "-vcodec", "mpeg4","-qscale","5", "-r", "24", end_video_filepath])
+        return_value = subprocess.call(["ffmpeg","-y","-r","24", "-i", (picture_filepath + "/%04d.png"), 
+                                        "-filter", "minterpolate", "-vcodec", "mpeg4","-qscale","5", "-r", "24", 
+                                        end_video_filepath])
         return return_value
     
     #filepaths need working out
     
     
     if interpolate==True and resize_video==True:
-        return_value = subprocess.call(["ffmpeg","-y","-r","24", "-i", (picture_filepath + "/%04d.png"), "-filter", "minterpolate", "-vcodec", "mpeg4","-qscale","5", "-r", "24", end_video_filepath])
+        return_value = subprocess.call(["ffmpeg","-y","-r","24", "-i", (picture_filepath + "/%04d.png"), 
+                                        "-filter", "minterpolate", "-vcodec", "mpeg4","-qscale","5", "-r", "24", 
+                                        end_video_filepath])
         return return_value
         clip = mp.VideoFileClip(end_video_filepath)
         clip_resized = clip.resize(height=1000)
